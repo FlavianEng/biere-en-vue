@@ -1,6 +1,6 @@
 <script lang="ts">
-import { routeNames } from './router/index';
 import { defineComponent } from 'vue';
+import { routeNames } from './router/index';
 
 export default defineComponent({
   data() {
