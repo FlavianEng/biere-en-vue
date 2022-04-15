@@ -1,5 +1,4 @@
 <script lang="ts">
-import { RouterLink, RouterView } from 'vue-router';
 import { routeNames } from './router/index';
 import { defineComponent } from 'vue';
 
@@ -18,7 +17,7 @@ export default defineComponent({
       <RouterLink
         to="/"
         class="text-6xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">
-        Title
+        Bière en vue !
       </RouterLink>
 
       <nav class="flex w-full py-2 justify-evenly">
