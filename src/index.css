@@ -32,5 +32,13 @@
     writing-mode: vertical-lr;
     text-orientation: mixed;
   }
+
+  .text-title {
+    @apply text-xl font-moonget my-1;
+  }
+
+  .text-subtitle {
+    @apply text-yellow-dark font-semibold text-base;
+  }
 }
 

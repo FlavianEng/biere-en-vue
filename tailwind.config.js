@@ -1,6 +1,6 @@
 module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-  plugins: [],
+  plugins: [require('@tailwindcss/line-clamp')],
   theme: {
     colors: {
       black: '#161100',
