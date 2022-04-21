@@ -25,6 +25,12 @@ module.exports = {
         montserrat: ['Montserrat', 'sans-serif'],
         moonget: ['Moon-Get', 'sans-serif'],
       },
+      minHeight: {
+        10: '2.5rem',
+      },
+      minWidth: {
+        10: '2.5rem',
+      },
     },
   },
 };
