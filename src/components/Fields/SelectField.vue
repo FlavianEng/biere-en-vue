@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import InputContainer from '@/components/Fields/InputContainer.vue';
+import FieldContainer from '@/components/Fields/FieldContainer.vue';
 import type { PropType } from 'vue';
 
 type Option = {
@@ -9,8 +9,9 @@ type Option = {
 };
 
 export default defineComponent({
+  name: 'SelectField',
   components: {
-    InputContainer,
+    FieldContainer,
   },
   props: {
     className: {
@@ -61,7 +62,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <InputContainer :name="name" :label="label" :className="className" :errorMessage="errorMessage">
+  <FieldContainer :name="name" :label="label" :className="className" :errorMessage="errorMessage">
     <select
       :id="htmlFor"
       :name="name"
@@ -76,5 +77,5 @@ export default defineComponent({
         {{ option.value }}
       </option>
     </select>
-  </InputContainer>
+  </FieldContainer>
 </template>

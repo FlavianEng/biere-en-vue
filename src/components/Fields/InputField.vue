@@ -1,14 +1,15 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
+import FieldContainer from '@/components/Icons/components/FieldContainer.vue';
 import IconBase from '@/components/Icons/IconBase.vue';
 import IconSearch from '@/components/Icons/components/IconSearch.vue';
-import InputContainer from './InputContainer.vue';
 
 export default defineComponent({
+  name: 'InputField',
   components: {
+    FieldContainer,
     IconBase,
     IconSearch,
-    InputContainer,
   },
   props: {
     className: {
@@ -76,7 +77,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <InputContainer :name="name" :label="label" :className="className" :errorMessage="errorMessage">
+  <FieldContainer :name="name" :label="label" :className="className" :errorMessage="errorMessage">
     <div class="relative">
       <IconBase
         v-if="iconName"
@@ -98,5 +99,5 @@ export default defineComponent({
         :class="{ 'border-red': errorMessage, 'pl-16': iconName }"
         autocomplete="off" />
     </div>
-  </InputContainer>
+  </FieldContainer>
 </template>
