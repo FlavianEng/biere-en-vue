@@ -1,24 +1,7 @@
-<template>
-  <div class="flex flex-col" :class="className">
-    <label v-if="label" :for="htmlFor" class="mb-2 font-bold">{{ label }}</label>
-    <input
-      :id="htmlFor"
-      :name="name"
-      :type="type"
-      :required="!optional"
-      :placeholder="placeholder"
-      :min="min"
-      :max="max"
-      v-model="valueModel"
-      class="bg-grey-light outline-none rounded-xl p-5 h-16 border border-transparent transition-all focus:border-yellow-dark"
-      :class="{ 'border-red': errorMessage }"
-      autocomplete="off" />
-    <span v-if="errorMessage" class="text-red italic w-full mt-1">{{ errorMessage }}</span>
-  </div>
-</template>
-
 <script lang="ts">
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   props: {
     className: {
       default: '',
@@ -62,7 +45,7 @@ export default {
       return `form-${this.name}`;
     },
     valueModel: {
-      get(): string {
+      get(): string | number | boolean {
         return this.value;
       },
       set(val: string): void {
@@ -70,5 +53,24 @@ export default {
       },
     },
   },
-};
+});
 </script>
+
+<template>
+  <div class="flex flex-col" :class="className">
+    <label v-if="label" :for="htmlFor" class="mb-2 font-bold">{{ label }}</label>
+    <input
+      :id="htmlFor"
+      :name="name"
+      :type="type"
+      :required="!optional"
+      :placeholder="placeholder"
+      :min="min"
+      :max="max"
+      v-model="valueModel"
+      class="bg-grey-light outline-none rounded-xl p-5 h-16 border border-transparent transition-all focus:border-yellow-dark"
+      :class="{ 'border-red': errorMessage }"
+      autocomplete="off" />
+    <span v-if="errorMessage" class="text-red w-full mt-1">{{ errorMessage }}</span>
+  </div>
+</template>
