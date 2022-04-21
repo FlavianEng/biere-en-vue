@@ -14,3 +14,10 @@ export const getRandomBeer = async (): Promise<AxiosResponse<Beer>> => {
     .then((response) => response.data);
   return randomBeer;
 };
+
+export const getBeerById = async (id: string): Promise<Beer> => {
+  const [beer] = await axios
+    .get<Beer[]>(`${baseApiUrl}/beers/${id}`)
+    .then((response) => response.data);
+  return beer;
+};

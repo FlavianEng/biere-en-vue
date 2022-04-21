@@ -50,7 +50,7 @@ type MethodBeer = {
   twist: null;
 };
 
-interface HopsIngredient {
+export interface HopsIngredient {
   add: string;
   amount: {
     unit: string;
@@ -60,7 +60,7 @@ interface HopsIngredient {
   name: string;
 }
 
-interface MaltIngredient {
+export interface MaltIngredient {
   amount: {
     unit: string;
     value: number;

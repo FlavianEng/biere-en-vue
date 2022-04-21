@@ -1,14 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '@/views/HomeView.vue';
 
-type lazyComponent = Promise<typeof import('*.vue')>;
-
 export enum routeNames {
   home = '/',
-  page1 = '/page1',
+  detail = '/detail/:id',
 }
 
-const Page1View = (): lazyComponent => import('../views/Page1View.vue');
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+const DetailPageView = () => import('@/views/DetailPageView.vue');
+/* eslint-enable @typescript-eslint/explicit-function-return-type */
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,9 +19,14 @@ const router = createRouter({
       path: routeNames.home,
     },
     {
-      component: Page1View,
-      name: 'page1',
-      path: routeNames.page1,
+      component: DetailPageView,
+      name: 'detail',
+      path: routeNames.detail,
+    },
+    {
+      name: 'NotFound',
+      path: '/:pathMatch(.*)*',
+      redirect: routeNames.home,
     },
   ],
 });
