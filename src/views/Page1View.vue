@@ -8,4 +8,4 @@ export default defineComponent({
 });
 </script>
 
-<template>About page</template>
+<template>Page 1</template>
