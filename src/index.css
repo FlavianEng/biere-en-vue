@@ -1,3 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'Moon-get';
+  src: url(./assets/fonts/moon-get.ttf);
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+}
+
+@layer base {
+  * {
+    @apply font-montserrat;
+  }
+
+  input,
+  select {
+    @apply appearance-none;
+  }
+
+  button {
+    @apply select-none;
+  }
+}
+
+@layer components {
+  .text-vertical {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+  }
+
+  .text-title {
+    @apply text-xl font-moonget my-1;
+  }
+
+  .text-subtitle {
+    @apply text-yellow-dark font-semibold text-base;
+  }
+}
+
