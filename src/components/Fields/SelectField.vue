@@ -58,6 +58,7 @@ export default defineComponent({
       },
     },
   },
+  emits: ['onValueChange'],
 });
 </script>
 
