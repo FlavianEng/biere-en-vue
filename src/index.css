@@ -17,8 +17,7 @@
     @apply font-montserrat;
   }
 
-  input,
-  select {
+  input {
     @apply appearance-none;
   }
 
@@ -29,8 +28,11 @@
 
 @layer components {
   .text-vertical {
-    writing-mode: vertical-lr;
-    text-orientation: mixed;
+    -webkit-writing-mode: vertical-lr;
+        -ms-writing-mode: tb-lr;
+            writing-mode: vertical-lr;
+    -webkit-text-orientation: mixed;
+            text-orientation: mixed;
   }
 
   .text-title {
@@ -41,4 +43,3 @@
     @apply text-yellow-dark font-semibold text-base;
   }
 }
-
