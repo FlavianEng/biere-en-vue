@@ -1,25 +1,12 @@
 {
   "root": true,
-  "extends": [
-    "plugin:vue/vue3-essential",
-    "eslint:recommended",
-    "@vue/eslint-config-typescript/recommended",
-    "@vue/eslint-config-prettier"
-  ],
+  "extends": ["plugin:vue/vue3-essential", "eslint:recommended", "@vue/eslint-config-typescript/recommended", "@vue/eslint-config-prettier"],
   "env": {
     "node": true,
     "vue/setup-compiler-macros": true
   },
   "rules": {
     "no-console": 1,
-    "max-len": [
-      "error",
-      {
-        "code": 200,
-        "ignoreStrings": true,
-        "ignoreComments": true
-      }
-    ],
     "array-element-newline": [
       "error",
       {
