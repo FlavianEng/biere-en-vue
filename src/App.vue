@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { routeNames } from './router/index';
+import { routeNames } from '@/router/index';
 
 export default defineComponent({
   data() {
@@ -12,18 +12,12 @@ export default defineComponent({
 </script>
 
 <template>
-  <header class="flex justify-center items-center flex-col pt-8">
+  <header class="flex justify-center items-center flex-col pt-8 bg-yellow">
     <div>
-      <RouterLink
-        to="/"
-        class="text-6xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">
-        Bière en vue !
-      </RouterLink>
+      <RouterLink to="/" class=""> Bière en vue ! </RouterLink>
 
       <nav class="flex w-full py-2 justify-evenly">
-        <RouterLink :to="routeNames.page1" class="font-semibold text-pink-500 hover:text-violet-500"
-          >Page 1</RouterLink
-        >
+        <RouterLink :to="routeNames.page1" class="font-semibold">Page 1</RouterLink>
       </nav>
     </div>
   </header>
