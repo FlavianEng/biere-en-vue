@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { routeNames } from '@/router/index';
-import TheHeader from './components/TheHeader.vue';
+import TheHeader from '@/components/TheHeader.vue';
 
 export default defineComponent({
   components: { TheHeader },
