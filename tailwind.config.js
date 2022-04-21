@@ -7,6 +7,7 @@ module.exports = {
       grey: {
         DEFAULT: '#F0F0F0',
         dark: '#D0D0D0',
+        light: '#F9F9F9',
       },
       transparent: 'transparent',
       yellow: {
@@ -14,6 +15,11 @@ module.exports = {
         dark: '#DDAD00',
       },
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        montserrat: ['Montserrat', 'sans-serif'],
+        moonget: ['Moon-Get', 'sans-serif'],
+      },
+    },
   },
 };
