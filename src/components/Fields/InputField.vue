@@ -2,11 +2,13 @@
 import { defineComponent } from 'vue';
 import IconBase from '@/components/Icons/IconBase.vue';
 import IconSearch from '@/components/Icons/components/IconSearch.vue';
+import InputContainer from './InputContainer.vue';
 
 export default defineComponent({
   components: {
     IconBase,
     IconSearch,
+    InputContainer,
   },
   props: {
     className: {
@@ -74,8 +76,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="flex flex-col" :class="className">
-    <label v-if="label" :for="htmlFor" class="mb-2 font-bold">{{ label }}</label>
+  <InputContainer :name="name" :label="label" :className="className" :errorMessage="errorMessage">
     <div class="relative">
       <IconBase
         v-if="iconName"
@@ -97,6 +98,5 @@ export default defineComponent({
         :class="{ 'border-red': errorMessage, 'pl-16': iconName }"
         autocomplete="off" />
     </div>
-    <span v-if="errorMessage" class="text-red w-full mt-1">{{ errorMessage }}</span>
-  </div>
+  </InputContainer>
 </template>
