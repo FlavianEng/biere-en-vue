@@ -1,8 +1,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { routeNames } from '@/router/index';
+import TheHeader from '@/components/TheHeader.vue';
 
 export default defineComponent({
+  components: { TheHeader },
   data() {
     return {
       routeNames: routeNames,
@@ -12,15 +14,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <header class="flex justify-center items-center flex-col pt-8 bg-yellow">
-    <div>
-      <RouterLink to="/" class=""> Bière en vue ! </RouterLink>
-
-      <nav class="flex w-full py-2 justify-evenly">
-        <RouterLink :to="routeNames.page1" class="font-semibold">Page 1</RouterLink>
-      </nav>
-    </div>
-  </header>
+  <TheHeader />
 
   <main class="p-8">
     <RouterView />
