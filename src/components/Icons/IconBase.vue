@@ -5,6 +5,10 @@ import { ICON_SIZES } from '@/components/Icons/constants';
 export default defineComponent({
   name: 'IconBase',
   props: {
+    className: {
+      default: '',
+      type: String,
+    },
     fillColor: {
       type: String,
       default: 'fill-black',
@@ -15,7 +19,7 @@ export default defineComponent({
     },
     size: {
       type: String,
-      default: ICON_SIZES.md,
+      default: 'md',
     },
     width: {
       type: [Number, String],
@@ -41,7 +45,10 @@ export default defineComponent({
 </script>
 
 <template>
-  <span class="icon inline-flex items-center justify-center overflow-hidden" :style="getSizes">
+  <span
+    class="icon inline-flex items-center justify-center overflow-hidden"
+    :class="[className, fillColor]"
+    :style="getSizes">
     <slot />
   </span>
 </template>

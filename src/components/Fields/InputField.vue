@@ -1,7 +1,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
+import IconBase from '@/components/Icons/IconBase.vue';
+import IconSearch from '@/components/Icons/components/IconSearch.vue';
 
 export default defineComponent({
+  components: {
+    IconBase,
+    IconSearch,
+  },
   props: {
     className: {
       default: '',
@@ -9,6 +15,9 @@ export default defineComponent({
     },
     errorMessage: {
       default: '',
+      type: String,
+    },
+    iconName: {
       type: String,
     },
     label: {
@@ -41,6 +50,14 @@ export default defineComponent({
     },
   },
   computed: {
+    getIcon(): string | null {
+      switch (this.iconName) {
+        case 'search':
+          return 'IconSearch';
+      }
+
+      return null;
+    },
     htmlFor(): string {
       return `form-${this.name}`;
     },
@@ -59,18 +76,27 @@ export default defineComponent({
 <template>
   <div class="flex flex-col" :class="className">
     <label v-if="label" :for="htmlFor" class="mb-2 font-bold">{{ label }}</label>
-    <input
-      :id="htmlFor"
-      :name="name"
-      :type="type"
-      :required="!optional"
-      :placeholder="placeholder"
-      :min="min"
-      :max="max"
-      v-model="valueModel"
-      class="bg-grey-light outline-none rounded-xl p-5 h-16 border border-transparent transition-all focus:border-yellow-dark"
-      :class="{ 'border-red': errorMessage }"
-      autocomplete="off" />
+    <div class="relative">
+      <IconBase
+        v-if="iconName"
+        fillColor="fill-grey-dark"
+        size="lg"
+        className="absolute left-5 top-2/4 -translate-y-2/4 pointer-events-none">
+        <component :is="getIcon" />
+      </IconBase>
+      <input
+        :id="htmlFor"
+        :name="name"
+        :type="type"
+        :required="!optional"
+        :placeholder="placeholder"
+        :min="min"
+        :max="max"
+        v-model="valueModel"
+        class="bg-grey-light outline-none rounded-xl p-5 h-16 border border-transparent transition-all focus:border-yellow-dark w-full"
+        :class="{ 'border-red': errorMessage, 'pl-16': iconName }"
+        autocomplete="off" />
+    </div>
     <span v-if="errorMessage" class="text-red w-full mt-1">{{ errorMessage }}</span>
   </div>
 </template>
