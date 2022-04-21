@@ -10,7 +10,7 @@
       :min="min"
       :max="max"
       v-model="valueModel"
-      class="bg-grey-light border-none outline-none rounded-xl p-5 h-16 border border-transparent transition-all focus:border-yellow-dark"
+      class="bg-grey-light outline-none rounded-xl p-5 h-16 border border-transparent transition-all focus:border-yellow-dark"
       :class="{ 'border-red': errorMessage }"
       autocomplete="off" />
     <span v-if="errorMessage" class="text-red italic w-full mt-1">{{ errorMessage }}</span>
