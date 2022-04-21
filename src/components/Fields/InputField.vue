@@ -1,10 +1,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
+import FieldContainer from '@/components/Icons/components/FieldContainer.vue';
 import IconBase from '@/components/Icons/IconBase.vue';
 import IconSearch from '@/components/Icons/components/IconSearch.vue';
 
 export default defineComponent({
+  name: 'InputField',
   components: {
+    FieldContainer,
     IconBase,
     IconSearch,
   },
@@ -74,8 +77,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="flex flex-col" :class="className">
-    <label v-if="label" :for="htmlFor" class="mb-2 font-bold">{{ label }}</label>
+  <FieldContainer :name="name" :label="label" :className="className" :errorMessage="errorMessage">
     <div class="relative">
       <IconBase
         v-if="iconName"
@@ -97,6 +99,5 @@ export default defineComponent({
         :class="{ 'border-red': errorMessage, 'pl-16': iconName }"
         autocomplete="off" />
     </div>
-    <span v-if="errorMessage" class="text-red w-full mt-1">{{ errorMessage }}</span>
-  </div>
+  </FieldContainer>
 </template>
