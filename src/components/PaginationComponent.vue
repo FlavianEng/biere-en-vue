@@ -29,15 +29,15 @@ export default defineComponent({
   },
   methods: {
     nextPageIsActive(page): boolean {
-      return page <= this.getNumberOfPages;
+      return page < this.getNumberOfPages;
     },
     onChangePage(page) {
-      if (this.previousPageIsActive(page) && this.previousPageIsActive(page)) {
+      if (page >= 1 && page <= this.getNumberOfPages) {
         this.$emit('handleChangePage', page);
       }
     },
     previousPageIsActive(page): boolean {
-      return page >= 1;
+      return page > 1;
     },
   },
   emits: ['handleChangePage'],
@@ -46,14 +46,17 @@ export default defineComponent({
 
 <template>
   <div class="flex">
-    <CustomButton @handleClick="onChangePage(currentPage - 1)">
+    <CustomButton
+      @handleClick="onChangePage(currentPage - 1)"
+      :disabled="!previousPageIsActive(currentPage)">
       <IconBase><IconArrowLeft /></IconBase>
     </CustomButton>
     <div class="flex items-center gap-10 mx-6 overflow-x-auto max-width">
       <div v-for="index in getNumberOfPages" :key="index" class="h-10 w-10 min-w-10 min-h-10">
         <CustomButton
-          className="bg-transparent hover:bg-grey-light text-black !p-0 w-full !h-full"
-          v-if="currentPage !== index">
+          class="bg-transparent hover:bg-grey-light text-black !p-0 w-full !h-full"
+          v-if="currentPage !== index"
+          @handleClick="onChangePage(index)">
           {{ index }}
         </CustomButton>
         <span
@@ -63,7 +66,9 @@ export default defineComponent({
         </span>
       </div>
     </div>
-    <CustomButton @handleClick="onChangePage(currentPage + 1)">
+    <CustomButton
+      @handleClick="onChangePage(currentPage + 1)"
+      :disabled="!nextPageIsActive(currentPage)">
       <IconBase><IconArrowRight /></IconBase>
     </CustomButton>
   </div>

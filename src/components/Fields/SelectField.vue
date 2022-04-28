@@ -3,8 +3,8 @@ import { defineComponent } from 'vue';
 import FieldContainer from '@/components/Fields/FieldContainer.vue';
 import type { PropType } from 'vue';
 
-type Option = {
-  name: string;
+export type Option = {
+  name: number;
   value: string;
 };
 
@@ -53,7 +53,7 @@ export default defineComponent({
       get(): string | number | boolean {
         return this.value;
       },
-      set(val: string): void {
+      set(val: string | number): void {
         this.$emit('onValueChange', val);
       },
     },

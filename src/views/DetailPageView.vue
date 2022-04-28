@@ -1,13 +1,17 @@
 <script lang="ts">
 import type { Beer } from '@/models/beer.model';
+import CustomButton from '@/components/CustomButton.vue';
 import { defineComponent } from 'vue';
 import { getBeerById } from '@/api/beer.api';
 import type { HopsIngredient } from '@/models/beer.model';
+import IconArrowLeft from '@/components/Icons/components/IconArrowLeft.vue';
+import IconBase from '@/components/Icons/IconBase.vue';
+import LoaderComponent from '@/components/LoaderComponent.vue';
 import type { MaltIngredient } from '@/models/beer.model';
-import PillItem from '../components/PillItem.vue';
+import PillItem from '@/components/PillItem.vue';
 
 export default defineComponent({
-  components: { PillItem },
+  components: { CustomButton, IconArrowLeft, IconBase, LoaderComponent, PillItem },
   data() {
     return {
       beer: {} as Beer,
@@ -57,17 +61,17 @@ export default defineComponent({
 </script>
 
 <template>
-  <div
-    v-if="!Object.keys(beer).length"
-    class="text-2xl flex justify-center items-center my-10 gap-x-2">
-    <span class="animate-spin-fast">🍺</span>
-    <p>Loading</p>
-  </div>
+  <LoaderComponent :isActive="!Object.keys(beer).length" />
   <div v-if="Object.keys(beer).length" class="flex flex-col gap-y-10">
     <div class="flex">
-      <RouterLink to="/" class="mr-16">
-        <button>Retour</button>
-      </RouterLink>
+      <CustomButton class="!px-0 group mr-10">
+        <RouterLink to="/" class="w-full h-full flex items-center gap-5 px-10">
+          <IconBase fillColor="fill-yellow-dark group-hover:fill-yellow transition-all">
+            <IconArrowLeft />
+          </IconBase>
+          Retour
+        </RouterLink>
+      </CustomButton>
       <div>
         <p class="text-title">{{ beer.name }}</p>
         <p class="text-subtitle mb-5">{{ beer.tagline }}</p>

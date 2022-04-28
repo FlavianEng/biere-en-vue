@@ -4,6 +4,7 @@ import { defineComponent } from 'vue';
 import exampleBottle from '@/assets/images/defaultBeer.png';
 import IconArrowRight from '@/components/Icons/components/IconArrowRight.vue';
 import IconBase from '@/components/Icons/IconBase.vue';
+import { routeNames } from '@/router';
 
 export default defineComponent({
   name: 'CardItem',
@@ -11,6 +12,10 @@ export default defineComponent({
   props: {
     description: {
       type: String,
+      required: true,
+    },
+    id: {
+      type: Number,
       required: true,
     },
     imgUrl: {
@@ -28,6 +33,7 @@ export default defineComponent({
   data() {
     return {
       exampleBottle,
+      routes: routeNames,
     };
   },
   computed: {
@@ -53,11 +59,13 @@ export default defineComponent({
     <div>
       <p class="text-title">{{ title }}</p>
       <p class="text-subtitle mb-5">{{ subtitle }}</p>
-      <p class="mb-8 h-[5.800rem] line-clamp-3">
+      <p class="mb-8 line-clamp-3">
         {{ description }}
       </p>
-      <CustomButton className="px-0 group">
-        <RouterLink to="#" class="w-full h-full flex items-center gap-5 px-10">
+      <CustomButton class="!px-0 group">
+        <RouterLink
+          :to="routes.detail.replace(':id', id)"
+          class="w-full h-full flex items-center gap-5 px-10">
           Discover
           <IconBase fillColor="fill-yellow-dark group-hover:fill-yellow transition-all">
             <IconArrowRight />
