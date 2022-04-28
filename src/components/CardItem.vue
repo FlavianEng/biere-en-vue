@@ -2,10 +2,10 @@
 import CustomButton from './CustomButton.vue';
 import { defineComponent } from 'vue';
 import exampleBottle from '@/assets/images/defaultBeer.png';
+import { getImgUrl } from '@/services/beer.service';
 import IconArrowRight from '@/components/Icons/components/IconArrowRight.vue';
 import IconBase from '@/components/Icons/IconBase.vue';
 import { routeNames } from '@/router';
-import { getImgUrl } from '@/services/beer.service';
 
 export default defineComponent({
   name: 'CardItem',

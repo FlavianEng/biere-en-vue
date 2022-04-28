@@ -1,5 +1,3 @@
-<template>content</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue';
 
@@ -19,3 +17,5 @@ export default defineComponent({
   methods: {},
 });
 </script>
+
+<template>content</template>
