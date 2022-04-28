@@ -13,8 +13,7 @@ import NotFound from '../components/NotFound.vue';
 import PillItem from '@/components/PillItem.vue';
 
 export default defineComponent({
-  components: { CustomButton, IconArrowLeft, IconBase, LoaderComponent, PillItem },
-  components: { NotFound, PillItem },
+  components: { CustomButton, IconArrowLeft, IconBase, LoaderComponent, NotFound, PillItem },
   data() {
     return {
       beer: {} as Beer,
