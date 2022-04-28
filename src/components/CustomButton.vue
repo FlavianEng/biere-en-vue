@@ -5,13 +5,13 @@ import type { PropType } from 'vue';
 export default defineComponent({
   name: 'CustomButton',
   props: {
-    className: {
-      type: String,
-      default: '',
-    },
     color: {
       type: String,
       default: 'yellow',
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
     type: {
       type: String as PropType<'button' | 'submit' | 'reset' | undefined>,
@@ -38,9 +38,10 @@ export default defineComponent({
 
 <template>
   <button
+    :disabled="disabled"
     :type="type"
     class="px-10 text-white font-semibold uppercase rounded-lg outline-none transition-all h-16 flex justify-center items-center gap-5"
-    :class="[className, getColorButton]"
+    :class="[getColorButton, { '!bg-grey': disabled }]"
     @click="handleClick">
     <slot />
   </button>
