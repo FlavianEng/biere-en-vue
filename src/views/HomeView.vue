@@ -21,6 +21,6 @@ export default defineComponent({
       title="Wheit a minute"
       subtitle="You know you shouldn't"
       description="This is the description of the beer" />
-    <PaginationComponent :currentPage="1" :itemsPerPage="4" :length="18" />
   </div>
+  <PaginationComponent :currentPage="1" :itemsPerPage="4" :length="18" />
 </template>
