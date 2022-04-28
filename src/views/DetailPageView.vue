@@ -9,6 +9,7 @@ import IconBase from '@/components/Icons/IconBase.vue';
 import LoaderComponent from '@/components/LoaderComponent.vue';
 import type { MaltIngredient } from '@/models/beer.model';
 import PillItem from '@/components/PillItem.vue';
+import { getImgUrl } from '@/services/beer.service';
 
 export default defineComponent({
   components: { CustomButton, IconArrowLeft, IconBase, LoaderComponent, PillItem },
@@ -33,6 +34,9 @@ export default defineComponent({
     },
     getIbu(): string {
       return `IBU : ${this.beer.ibu}`;
+    },
+    getImg(): string {
+      return getImgUrl(this.beer.image_url ?? null);
     },
     getMalt(): string[] {
       const arrayOfNames = this.getIngredientListName(this.beer.ingredients.malt);
@@ -79,7 +83,7 @@ export default defineComponent({
     </div>
 
     <div class="bg-card">
-      <img :src="beer.image_url" :alt="getAlt" class="h-60 text-vertical mr-10" />
+      <img :src="getImg" :alt="getAlt" class="h-60 text-vertical mr-10" />
       <div>
         <p class="font-moonget mb-3">Description</p>
         <p class="mb-8">
