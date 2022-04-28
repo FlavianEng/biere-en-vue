@@ -48,7 +48,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="py-5 px-8 bg-grey-light rounded-xl flex">
+  <div class="bg-card">
     <img :src="getImgUrl" :alt="getAlt" class="h-64 text-vertical mr-10" />
     <div>
       <p class="text-title">{{ title }}</p>

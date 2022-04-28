@@ -42,4 +42,21 @@
   .text-subtitle {
     @apply text-yellow-dark font-semibold text-base;
   }
+
+  .bg-card {
+    @apply py-5 px-8 bg-grey-light rounded-xl flex;
+  }
+
+  .animate-spin-fast {
+    animation: spin 500ms linear infinite;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
