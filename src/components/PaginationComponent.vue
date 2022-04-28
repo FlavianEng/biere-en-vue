@@ -52,13 +52,13 @@ export default defineComponent({
     <div class="flex items-center gap-10 mx-6 overflow-x-auto max-width">
       <div v-for="index in getNumberOfPages" :key="index" class="h-10 w-10 min-w-10 min-h-10">
         <CustomButton
-          class="bg-transparent hover:bg-grey-light text-black no-padding w-full height-full"
+          className="bg-transparent hover:bg-grey-light text-black !p-0 w-full !h-full"
           v-if="currentPage !== index">
           {{ index }}
         </CustomButton>
         <span
           v-if="currentPage === index"
-          class="text-yellow-dark px-0 py-0 font-semibold flex items-center justify-center w-full height-full">
+          class="text-yellow-dark px-0 py-0 font-semibold flex items-center justify-center w-full h-full">
           {{ index }}
         </span>
       </div>
@@ -72,13 +72,5 @@ export default defineComponent({
 <style scoped>
 .max-width {
   max-width: calc((2.5rem * 4) + (1.5rem * 2) + (2.5rem * 3));
-}
-
-.no-padding {
-  padding: 0 !important;
-}
-
-.height-full {
-  height: 100% !important;
 }
 </style>
