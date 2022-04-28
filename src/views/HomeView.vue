@@ -30,6 +30,7 @@ export default defineComponent({
       filters: {
         search: '',
       },
+      isLoading: false,
       itemsPerPage: OPTIONS_ITEMS_PER_PAGE[0].name,
       optionsItemsPerPage: OPTIONS_ITEMS_PER_PAGE,
       totalNumberOfBeers: 0,
@@ -38,12 +39,19 @@ export default defineComponent({
 
   methods: {
     async getBeers(): Promise<void> {
-      this.beers = await getBeers(this.currentPage, this.itemsPerPage, this.filters);
+      this.isLoading = true;
+      this.beers = await getBeers(this.currentPage, this.itemsPerPage, this.filters).finally(
+        () => (this.isLoading = false),
+      );
     },
     async getTotalNumberOfBeers(filters: Filters): Promise<void> {
-      this.totalNumberOfBeers = await getTotalNumberOfBeers(filters);
+      this.isLoading = true;
+      this.totalNumberOfBeers = await getTotalNumberOfBeers(filters).finally(
+        () => (this.isLoading = false),
+      );
     },
     async onChangeItemsPerPage(itemsPerpage: number): Promise<void> {
+      this.currentPage = 1;
       this.itemsPerPage = itemsPerpage;
       await this.getBeers();
     },
@@ -62,6 +70,7 @@ export default defineComponent({
       }
 
       if (!Object.keys(cloneObject(this.errors)).length) {
+        this.currentPage = 1;
         await this.getBeers();
         await this.getTotalNumberOfBeers(this.filters);
       }
@@ -75,7 +84,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="max-w-7xl m-auto">
+  <div>
     <div class="mb-12">
       <form class="flex items-center" @submit="onSubmit">
         <InputField
@@ -85,15 +94,21 @@ export default defineComponent({
           placeholder="Rechercher une bière..."
           class="flex-1"
           :value="filters.search"
-          :errorMessage="errors.search"
+          :errorMessage="errors['search']"
           @onValueChange="filters.search = $event" />
         <CustomButton type="submit" class="ml-10" :disabled="!filters.search.length">
           Rechercher
         </CustomButton>
       </form>
     </div>
-    <LoaderComponent :isActive="!beers.length" />
-    <div class="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3" v-if="beers.length">
+    <LoaderComponent :isActive="isLoading" />
+    <p v-if="!isLoading && !beers.length">Aucun résultat...</p>
+    <p class="mb-5 text-right">
+      {{ totalNumberOfBeers }} résultat{{ totalNumberOfBeers > 1 ? 's' : '' }}
+    </p>
+    <div
+      class="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+      v-if="!isLoading && beers.length">
       <CardItem
         v-for="(beer, index) in beers"
         :key="index"
@@ -105,7 +120,7 @@ export default defineComponent({
     </div>
     <div class="flex items-center justify-end mt-12">
       <PaginationComponent
-        v-if="totalNumberOfBeers"
+        v-if="totalNumberOfBeers >= itemsPerPage"
         :currentPage="currentPage"
         :itemsPerPage="itemsPerPage"
         :length="totalNumberOfBeers"

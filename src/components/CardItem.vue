@@ -59,7 +59,7 @@ export default defineComponent({
     <div>
       <p class="text-title">{{ title }}</p>
       <p class="text-subtitle mb-5">{{ subtitle }}</p>
-      <p class="mb-8 h-[5.800rem] line-clamp-3">
+      <p class="mb-8 line-clamp-3">
         {{ description }}
       </p>
       <CustomButton class="!px-0 group">

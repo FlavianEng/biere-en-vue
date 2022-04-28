@@ -16,7 +16,7 @@ export default defineComponent({
 <template>
   <TheHeader />
 
-  <main class="p-8">
+  <main class="p-8 max-w-7xl m-auto">
     <RouterView />
   </main>
 </template>
