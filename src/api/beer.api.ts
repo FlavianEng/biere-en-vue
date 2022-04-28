@@ -21,3 +21,10 @@ export const getBeerById = async (id: string): Promise<Beer> => {
     .then((response) => response.data);
   return beer;
 };
+
+export const getBeers = async (pageNumber = 1, itemsPerPage = 26): Promise<Beer[]> => {
+  const beerArray = await axios
+    .get(`${baseApiUrl}/beers?page=${pageNumber}&per_page=${itemsPerPage}`)
+    .then((response) => response.data);
+  return beerArray;
+};
