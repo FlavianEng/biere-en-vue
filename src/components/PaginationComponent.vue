@@ -49,13 +49,19 @@ export default defineComponent({
     <CustomButton @handleClick="onChangePage(currentPage - 1)">
       <IconBase><IconArrowLeft /></IconBase>
     </CustomButton>
-    <div class="flex items-center gap-10 px-6 overflow-x-auto max-width">
-      <CustomButton
-        class="bg-transparent hover:bg-grey-light text-black px-0 py-0 h-10 w-10 min-w-10 min-h-10"
-        v-for="index in getNumberOfPages"
-        :key="index">
-        {{ index }}
-      </CustomButton>
+    <div class="flex items-center gap-10 mx-6 overflow-x-auto max-width">
+      <div v-for="index in getNumberOfPages" :key="index" class="h-10 w-10 min-w-10 min-h-10">
+        <CustomButton
+          class="bg-transparent hover:bg-grey-light text-black no-padding w-full height-full"
+          v-if="currentPage !== index">
+          {{ index }}
+        </CustomButton>
+        <span
+          v-if="currentPage === index"
+          class="text-yellow-dark px-0 py-0 font-semibold flex items-center justify-center w-full height-full">
+          {{ index }}
+        </span>
+      </div>
     </div>
     <CustomButton @handleClick="onChangePage(currentPage + 1)">
       <IconBase><IconArrowRight /></IconBase>
@@ -66,5 +72,13 @@ export default defineComponent({
 <style scoped>
 .max-width {
   max-width: calc((2.5rem * 4) + (1.5rem * 2) + (2.5rem * 3));
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.height-full {
+  height: 100% !important;
 }
 </style>
