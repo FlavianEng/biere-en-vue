@@ -76,7 +76,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <LoaderComponent :isActive="!Object.keys(beer).length" />
+  <LoaderComponent :isActive="loading" />
   <NotFound v-if="!loading && !Object.keys(beer).length" label="Beer not found" />
   <div v-if="!loading && Object.keys(beer).length" class="flex flex-col gap-y-10">
     <div class="flex">
@@ -85,7 +85,7 @@ export default defineComponent({
           <IconBase fillColor="fill-yellow-dark group-hover:fill-yellow transition-all">
             <IconArrowLeft />
           </IconBase>
-          Retour
+          Back to home
         </RouterLink>
       </CustomButton>
       <div>

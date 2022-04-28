@@ -66,7 +66,7 @@ export default defineComponent({
       const { search } = this.filters;
 
       if (!search) {
-        this.errors = { ...this.errors, search: 'La recherche est obligatoire' };
+        this.errors = { ...this.errors, search: 'Search is required' };
       }
 
       if (!Object.keys(cloneObject(this.errors)).length) {
@@ -91,20 +91,20 @@ export default defineComponent({
           type="search"
           name="search"
           iconName="search"
-          placeholder="Rechercher une bière..."
+          placeholder="Find a beer..."
           class="flex-1"
           :value="filters.search"
           :errorMessage="errors['search']"
           @onValueChange="filters.search = $event" />
         <CustomButton type="submit" class="ml-10" :disabled="!filters.search.length">
-          Rechercher
+          Find
         </CustomButton>
       </form>
     </div>
     <LoaderComponent :isActive="isLoading" />
-    <p v-if="!isLoading && !beers.length">Aucun résultat...</p>
+    <p v-if="!isLoading && !beers.length">No result...</p>
     <p class="mb-5 text-right">
-      {{ totalNumberOfBeers }} résultat{{ totalNumberOfBeers > 1 ? 's' : '' }}
+      {{ totalNumberOfBeers }} result{{ totalNumberOfBeers > 1 ? 's' : '' }}
     </p>
     <div
       class="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
@@ -127,7 +127,7 @@ export default defineComponent({
         @handleChangePage="onChangePage($event)" />
       <SelectField
         name="itemsPerPage"
-        placeholder="Bières par page"
+        placeholder="Beers per page"
         optional
         :options="optionsItemsPerPage"
         :value="itemsPerPage"
