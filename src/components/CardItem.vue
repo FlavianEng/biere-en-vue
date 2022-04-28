@@ -50,7 +50,7 @@ export default defineComponent({
 
 <template>
   <div class="bg-card">
-    <img :src="getImg" :alt="getAlt" class="h-64 text-vertical mr-10" />
+    <img :src="getImg" :alt="getAlt" class="h-64 w-[4rem] text-vertical mr-10 object-contain" />
     <div>
       <p class="text-title">{{ title }}</p>
       <p class="text-subtitle mb-5">{{ subtitle }}</p>
