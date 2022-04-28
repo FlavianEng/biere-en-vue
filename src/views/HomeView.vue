@@ -5,15 +5,18 @@ import { defineComponent } from 'vue';
 import { getBeers } from '@/api/beer.api';
 import { getTotalNumberOfBeers } from '@/services/beer.service';
 import LoaderComponent from '@/components/LoaderComponent.vue';
+import OPTIONS_ITEMS_PER_PAGE from '@/data/options/itemsPerPage';
 import PaginationComponent from '@/components/PaginationComponent.vue';
+import SelectField from '@/components/Fields/SelectField.vue';
 
 export default defineComponent({
-  components: { CardItem, LoaderComponent, PaginationComponent },
+  components: { CardItem, LoaderComponent, PaginationComponent, SelectField },
   data() {
     return {
       beers: [] as Beer[],
       currentPage: 1,
-      itemsPerPage: 12,
+      itemsPerPage: OPTIONS_ITEMS_PER_PAGE[0].name,
+      optionsItemsPerPage: OPTIONS_ITEMS_PER_PAGE,
       totalNumberOfBeers: 0,
     };
   },
@@ -23,6 +26,10 @@ export default defineComponent({
     },
     async getTotalNumberOfBeers(): Promise<void> {
       this.totalNumberOfBeers = await getTotalNumberOfBeers();
+    },
+    async onChangeItemsPerPage(itemsPerpage: number): Promise<void> {
+      this.itemsPerPage = itemsPerpage;
+      await this.getBeers();
     },
     async onChangePage(page: number): Promise<void> {
       this.currentPage = page;
@@ -49,14 +56,21 @@ export default defineComponent({
         :subtitle="beer.tagline"
         :description="beer.description" />
     </div>
-    <div class="flex items-center justify-end">
+    <div class="flex items-center justify-end mt-12">
       <PaginationComponent
         v-if="totalNumberOfBeers"
         :currentPage="currentPage"
         :itemsPerPage="itemsPerPage"
         :length="totalNumberOfBeers"
-        @handleChangePage="onChangePage($event)"
-        class="mt-12" />
+        @handleChangePage="onChangePage($event)" />
+      <SelectField
+        name="itemsPerPage"
+        placeholder="Bières par page"
+        optional
+        :options="optionsItemsPerPage"
+        :value="itemsPerPage"
+        class="ml-6"
+        @onValueChange="onChangeItemsPerPage($event)" />
     </div>
   </div>
 </template>
