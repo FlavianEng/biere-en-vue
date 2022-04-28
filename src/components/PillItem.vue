@@ -13,5 +13,5 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="py-1 px-5 rounded-full bg-yellow w-min whitespace-nowrap">{{ label }}</div>
+  <div class="pill-shape bg-yellow">{{ label }}</div>
 </template>

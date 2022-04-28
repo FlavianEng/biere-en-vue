@@ -29,10 +29,10 @@
 @layer components {
   .text-vertical {
     -webkit-writing-mode: vertical-lr;
-        -ms-writing-mode: tb-lr;
-            writing-mode: vertical-lr;
+    -ms-writing-mode: tb-lr;
+    writing-mode: vertical-lr;
     -webkit-text-orientation: mixed;
-            text-orientation: mixed;
+    text-orientation: mixed;
   }
 
   .text-title {
@@ -50,6 +50,10 @@
   .animate-spin-fast {
     animation: spin 500ms linear infinite;
   }
+
+  .pill-shape {
+    @apply py-1 px-5 rounded-full w-min whitespace-nowrap;
+  }
 }
 
 @keyframes spin {
@@ -60,3 +64,4 @@
     transform: rotate(360deg);
   }
 }
+
