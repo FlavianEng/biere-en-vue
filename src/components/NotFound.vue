@@ -12,10 +12,6 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    tableFlip: {
-      type: Boolean,
-      default: true,
-    },
   },
   data() {
     return {
@@ -35,9 +31,10 @@ export default defineComponent({
   <div class="flex flex-col justify-center items-center">
     <img class="h-full mb-8" :src="outOfBeerGif" alt="Out of beer gif" />
     <div class="bg-card w-full flex flex-col justify-center items-center gap-y-8">
-      <p class="font-moonget">
-        Beer not found <span v-if="tableFlip" class="font-montserrat">(╯°□°）╯︵ ┻━┻</span>
-      </p>
+      <div class="flex gap-x-2">
+        <p class="font-moonget">Beer not found</p>
+        <p class="hidden md:block">(╯°□°）╯︵ ┻━┻</p>
+      </div>
       <CustomButton @handle-click="redirectToHome">Back to home</CustomButton>
     </div>
   </div>
