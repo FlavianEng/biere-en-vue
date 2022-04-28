@@ -1,5 +1,16 @@
+import exampleBottle from '@/assets/images/defaultBeer.png';
 import type { Filters } from '@/models/filters.model';
 import { getBeers } from '@/api/beer.api';
+
+export const getImgUrl = (imgUrl: string | null): string => {
+  let beerImgUrl = imgUrl;
+
+  if (!imgUrl) {
+    beerImgUrl = exampleBottle;
+  }
+
+  return beerImgUrl as string;
+};
 
 // We have to calculate the total number of beers since the API does not return this information
 export const getTotalNumberOfBeers = async (filters: Filters = {}): Promise<number> => {

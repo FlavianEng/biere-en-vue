@@ -2,6 +2,7 @@
 import CustomButton from './CustomButton.vue';
 import { defineComponent } from 'vue';
 import exampleBottle from '@/assets/images/defaultBeer.png';
+import { getImgUrl } from '@/services/beer.service';
 import IconArrowRight from '@/components/Icons/components/IconArrowRight.vue';
 import IconBase from '@/components/Icons/IconBase.vue';
 import { routeNames } from '@/router';
@@ -40,14 +41,8 @@ export default defineComponent({
     getAlt(): string {
       return 'Visuel de la bière'.concat(' ', this.title);
     },
-    getImgUrl(): string {
-      let beerImgUrl = this.imgUrl;
-
-      if (!this.imgUrl) {
-        beerImgUrl = this.exampleBottle;
-      }
-
-      return beerImgUrl as string;
+    getImg(): string {
+      return getImgUrl(this.imgUrl ?? null);
     },
   },
 });
@@ -55,7 +50,7 @@ export default defineComponent({
 
 <template>
   <div class="bg-card">
-    <img :src="getImgUrl" :alt="getAlt" class="h-64 text-vertical mr-10" />
+    <img :src="getImg" :alt="getAlt" class="h-64 text-vertical mr-10" />
     <div>
       <p class="text-title">{{ title }}</p>
       <p class="text-subtitle mb-5">{{ subtitle }}</p>

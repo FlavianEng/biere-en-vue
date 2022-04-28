@@ -3,18 +3,21 @@ import type { Beer } from '@/models/beer.model';
 import CustomButton from '@/components/CustomButton.vue';
 import { defineComponent } from 'vue';
 import { getBeerById } from '@/api/beer.api';
+import { getImgUrl } from '@/services/beer.service';
 import type { HopsIngredient } from '@/models/beer.model';
 import IconArrowLeft from '@/components/Icons/components/IconArrowLeft.vue';
 import IconBase from '@/components/Icons/IconBase.vue';
 import LoaderComponent from '@/components/LoaderComponent.vue';
 import type { MaltIngredient } from '@/models/beer.model';
+import NotFound from '../components/NotFound.vue';
 import PillItem from '@/components/PillItem.vue';
 
 export default defineComponent({
-  components: { CustomButton, IconArrowLeft, IconBase, LoaderComponent, PillItem },
+  components: { CustomButton, IconArrowLeft, IconBase, LoaderComponent, NotFound, PillItem },
   data() {
     return {
       beer: {} as Beer,
+      loading: true,
     };
   },
   computed: {
@@ -34,6 +37,9 @@ export default defineComponent({
     getIbu(): string {
       return `IBU : ${this.beer.ibu}`;
     },
+    getImg(): string {
+      return getImgUrl(this.beer.image_url ?? null);
+    },
     getMalt(): string[] {
       const arrayOfNames = this.getIngredientListName(this.beer.ingredients.malt);
       return [...new Set(arrayOfNames)];
@@ -46,7 +52,16 @@ export default defineComponent({
     async getBeer() {
       this.$route;
       const beerId = this.$route.params.id as string;
-      this.beer = await getBeerById(beerId);
+      const beer = await getBeerById(beerId);
+
+      if (!beer) {
+        this.beer = {} as Beer;
+        this.loading = false;
+        return;
+      }
+
+      this.beer = beer;
+      this.loading = false;
     },
     getIngredientListName(array: HopsIngredient[] | MaltIngredient[]): string[] {
       if (!this.beer) return [];
@@ -62,7 +77,8 @@ export default defineComponent({
 
 <template>
   <LoaderComponent :isActive="!Object.keys(beer).length" />
-  <div v-if="Object.keys(beer).length" class="flex flex-col gap-y-10">
+  <NotFound v-if="!loading && !Object.keys(beer).length" label="Beer not found" />
+  <div v-if="!loading && Object.keys(beer).length" class="flex flex-col gap-y-10">
     <div class="flex">
       <CustomButton class="!px-0 group mr-10">
         <RouterLink to="/" class="w-full h-full flex items-center gap-5 px-10">
@@ -79,7 +95,7 @@ export default defineComponent({
     </div>
 
     <div class="bg-card">
-      <img :src="beer.image_url" :alt="getAlt" class="h-60 text-vertical mr-10" />
+      <img :src="getImg" :alt="getAlt" class="h-60 text-vertical mr-10" />
       <div>
         <p class="font-moonget mb-3">Description</p>
         <p class="mb-8">
