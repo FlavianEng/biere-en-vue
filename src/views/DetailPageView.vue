@@ -3,11 +3,12 @@ import type { Beer } from '@/models/beer.model';
 import { defineComponent } from 'vue';
 import { getBeerById } from '@/api/beer.api';
 import type { HopsIngredient } from '@/models/beer.model';
+import LoaderComponent from '@/components/LoaderComponent.vue';
 import type { MaltIngredient } from '@/models/beer.model';
-import PillItem from '../components/PillItem.vue';
+import PillItem from '@/components/PillItem.vue';
 
 export default defineComponent({
-  components: { PillItem },
+  components: { LoaderComponent, PillItem },
   data() {
     return {
       beer: {} as Beer,
@@ -57,12 +58,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div
-    v-if="!Object.keys(beer).length"
-    class="text-2xl flex justify-center items-center my-10 gap-x-2">
-    <span class="animate-spin-fast">🍺</span>
-    <p>Loading</p>
-  </div>
+  <LoaderComponent :isActive="!Object.keys(beer).length" />
   <div v-if="Object.keys(beer).length" class="flex flex-col gap-y-10">
     <div class="flex">
       <RouterLink to="/" class="mr-16">
