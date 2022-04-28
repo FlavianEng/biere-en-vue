@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import FieldContainer from '@/components/Icons/components/FieldContainer.vue';
+import FieldContainer from '@/components/Fields/FieldContainer.vue';
 import IconBase from '@/components/Icons/IconBase.vue';
 import IconSearch from '@/components/Icons/components/IconSearch.vue';
 

@@ -1,12 +1,8 @@
 import axios, { type AxiosResponse } from 'axios';
 import type { Beer } from '@/models/beer.model';
+import type { Filters } from '@/models/filters.model';
 
 const baseApiUrl = import.meta.env.VITE_API_URL;
-
-/**
- * Every query return an array of beers
- * When possible, use destructuring
- */
 
 export const getRandomBeer = async (): Promise<AxiosResponse<Beer>> => {
   const [randomBeer] = await axios
@@ -22,9 +18,17 @@ export const getBeerById = async (id: string): Promise<Beer> => {
   return beer;
 };
 
-export const getBeers = async (pageNumber = 1, itemsPerPage = 26): Promise<Beer[]> => {
+export const getBeers = async (
+  page = 1,
+  itemsPerPage = 16,
+  filters: Filters = {},
+): Promise<Beer[]> => {
   const beerArray = await axios
-    .get(`${baseApiUrl}/beers?page=${pageNumber}&per_page=${itemsPerPage}`)
+    .get(
+      `${baseApiUrl}/beers?page=${page}&per_page=${itemsPerPage}${
+        filters.search ? '&beer_name=' + filters.search : ''
+      }`,
+    )
     .then((response) => response.data);
   return beerArray;
 };
